@@ -1,24 +1,17 @@
 import { useQuery, gql } from "@apollo/client";
-import { Loading } from "../components/Loading/index";
 import { Layout } from "antd";
 import "././App.scss";
 import { Navbar } from "../components/Navbar/index";
 import { Home } from '../components/Home/index';
+import { Feature } from "../components/Card";
+import { ALL_FILMS } from "../services/allFilms";
 
 const { Header, Footer, Content } = Layout;
 
-const EXCHANGE_RATES = gql`
-  query {
-    allFilms {
-      films {
-        title
-      }
-    }
-  }
-`;
+
 
 export const App = () => {
-  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+  const { loading, error, data } = useQuery(ALL_FILMS);
   console.log(data);
 
   if (error) return <p>Error :(</p>;
@@ -31,6 +24,7 @@ export const App = () => {
         </Header>
         <Content>
           <Home></Home>
+          <Feature></Feature>
         </Content>
         <Footer></Footer>
       </Layout>
