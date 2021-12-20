@@ -1,3 +1,4 @@
+import {ReactNode} from 'react'
 import {
   ApolloClient,
   InMemoryCache,
@@ -20,9 +21,9 @@ const client = new ApolloClient({
   },
 });
 
-interface Props {
-  children: React.ReactNode;
-}
+type Props = {
+  children: ReactNode;
+};
 
 export function GraphqlClient({ children }: Props) {
   return <ApolloProvider client={client}>{children}</ApolloProvider>;

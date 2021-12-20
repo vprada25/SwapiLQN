@@ -1,9 +1,7 @@
-import { Anchor, Drawer, Button } from 'antd';
-
-const { Link } = Anchor;
-
+import { Anchor } from "antd";
 
 export const Navbar = () => {
+  const { Link } = Anchor;
   return (
     <div className="container-fluid">
       <div className="header">

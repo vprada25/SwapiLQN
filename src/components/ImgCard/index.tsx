@@ -1,0 +1,1 @@
+export { ImgCard } from './ImgCard';
