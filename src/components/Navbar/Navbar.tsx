@@ -11,7 +11,7 @@ export const Navbar = () => {
         </div>
         <div className="mobileHidden">
           <Anchor targetOffset={65}>
-            <Link href="/" title="Personajes" />
+            <Link href="#feature" title="Personajes" />
             <Link href="/" title="Naves" />
             <Link href="/" title="Planetas" />
             <Link href="/" title="Especies" />

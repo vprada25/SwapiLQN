@@ -13,25 +13,29 @@ export const Feature = () => {
   const { Meta } = Card;
   const [open, setOpen] = useState<boolean>(false);
   const [current, setCurrent] = useState<string>("");
-
+  const [person, setPerson] = useState<any>({
+    name: "",
+  });
   const { loading, error, data } = useQuery(ALL_PEOPLE);
 
-  const handleClickCard = (id: string) => {
+  
+
+  const handleClickCard = (id: string , person: any) => {
+    setPerson(person.node.name);
     setCurrent(id);
     setOpen(true);
     //window.location.pathname = window.location.origin + `${id}`
     window.history.pushState(null, "", id);
     console.log("modal abierto");
   };
+
   const closeModal = () => {
     //window.history.replaceState(null, "", null)
-
     setOpen(false);
     window.location.pathname = "";
   };
 
-  if (error) return <p>Error :(</p>;
-  return (
+  return error ? <p>Error :(</p> : (
     <div id="feature" className="block featureBlock bgGray">
       <div className="container-fluid">
         <div className="titleHolder">
@@ -45,22 +49,22 @@ export const Feature = () => {
           <Loading/>
         ) : (
           <Row gutter={[16, 16]}>
-            {data.allPeople.people.map((person: any, key: number) => (
+            {data.allPeople.edges.map((person: any, key: number) => (
               <Col key={person.id} xs={24} sm={12} md={8} lg={6} xl={6}>
                 <Card
                   hoverable
                   style={{ width: 240 }}
                   cover={<ImgCard file={key} />}
-                  onClick={() => handleClickCard(person.id)}
+                  onClick={() => handleClickCard(person.node.id, person)}
                 >
-                  <Meta title={person.name} />
+                  <Meta title={person.node.name} />
                 </Card>
               </Col>
             ))}
           </Row>
         )}
       </div>
-      <ModalDetail open={open} close={closeModal} id={current} />
+      <ModalDetail open={open} close={closeModal} id={current} person={person} />
     </div>
   );
 };
